@@ -1,0 +1,359 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@using DOLPHIN.Model
+@using DOLPHIN.Models
+@{
+    List<CartItem> lineCollection = new List<CartItem>();
+
+    var data = Context.Session.GetString("cart");
+
+    int coutCart = 0;
+    if (data == null)
+    {
+        coutCart = 0;
+    }
+    else
+    {
+        var data2 = Context.Session.GetString("cart");
+        List<CartItem> dataCart = JsonConvert.DeserializeObject<List<CartItem>>(data2);
+        foreach (var item in dataCart)
+        {
+            coutCart += item.Quantity;
+        }
+
+    }
+    //var sum = lineCollection.Sum(p => p.Quantity);
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Thời trang DOLPHIN</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/css/price-range.css" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href="~/css/responsive.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="~/js/html5shiv.js"></script>
+    <script src="~/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="~/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<!--/head-->
+
+<body>
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "105534355085017");
+        chatbox.setAttribute("attribution", "biz_inbox");
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v10.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <header id="header">
+        <!--header-->
+        <div class="header_top">
+            <!--header_top-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li><a href="#"><i class="fa fa-phone"></i> +84 368345905</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> dolphinclothing@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social-icons pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/header_top-->
+
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href="/Home/Index"><img style="width:140px;height:70px" src="~/images/home/logo.png" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="/Cart/CheckingOrderByClient">
+                                        <img src="~/images/paid-bill.png" style="width:25px;" alt="Alternate Text" />
+                                        Theo dõi đơn hàng
+                                    </a>
+                                </li>
+                                <li>
+                                    @if (data != null)
+                                    {
+                                <a href="/Cart/Index">
+                                    <span class="no_product">@coutCart sản phẩm</span>
+                                </a> }
+                                            else
+                                            {
+                                <a href="#">
+                                    <img src="~/images/shopping-cart-icon.png" style="width:25px;" alt="Alternate Text" />
+                                    <span class="no_product">Giỏ hàng</span>
+                                </a>}
+<li>
+                                    <a href="/admin/Login">
+                                        <img src="~/images/icon-login.png" style="width:25px;" alt="Alternate Text" />
+                                        Đăng nhập
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/header-middle-->
+
+        <div class="header-bottom">
+            <!--header-bottom-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                <li><a href="/Home/Index" class="active"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
+                                <li class="dropdown">
+                                    <a href="#">THỜI TRANG<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="#">Adidas</a></li>
+                                        <li><a href="#">H&M</a></li>
+                                        <li><a href="#">Nike</a></li>
+                                        <li><a href="#">Hermès</a></li>
+                                        <li><a href="#">Gucci</a></li>
+                                        <li><a href="#">Giảm giá</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/Home/Sales"><i class="fa fa-star"></i> SALE OFF</a></li>
+                                <li><a href="/News/Index"><i class="fa fa-paper"></i> TIN TỨC</a></li>
+                                <li><a href="/Home/Infomation"><i class="fa fa-paper"></i>GIỚI THIỆU</a></li>
+                                <li><a href="/Home/Contact">SHOW ROOM</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        @using (Html.BeginForm("Shop", "Home", new { @class = "search_box pull-right" }))
+                        {
+                            <input id="keyword" value="" class="form-control mr-sm-2" type="text" style="width:83%; display:inline" placeholder="Nhập nội dung tìm kiềm" aria-label="Tìm kiếm" name="keyword">
+                            <button class="icon-fallback-text btn ">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/header-bottom-->
+    </header>
+    <!--/header-->
+
+    @RenderBody()
+
+    <footer id="footer">
+        <!--Footer-->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="companyinfo">
+                            <h2><span>DOLPHIN</span>-clothing</h2>
+                            <p>Hệ thống thời trang trực tuyến hàng đầu</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" style="margin-top:30px">
+                        <div class="grid-20 connect_social  content-item">
+                            <h2 style="color:#FE980F;">Kết nối với chúng tôi</h2>
+                            <div class="icon_social">
+                                <div class="col-sm-6">
+                                    <p>
+                                        <a href="https://www.facebook.com/gumacfashion/">
+                                            <img src="https://cdn.gumac.vn/Content/Image/WebImage/face_icon.png" alt="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" title="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" description="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC">
+
+                                            FACEBOOK
+                                        </a>
+                                    </p>
+                                    <p>
+                                        <a href="https://zalo.me/3648657449157966974">
+                                            <img src="https://cdn.gumac.vn/Content/Image/WebImage/zalo24.png" alt="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" title="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" description="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC">
+
+                                            ZALO
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        <a href="https://www.youtube.com/channel/UC5cEiLCacHasscKufkTfo8Q/featured?view_as=subscriber">
+                                            <img src="https://cdn.gumac.vn/Content/Image/WebImage/youtube_icon.png" alt="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" title="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" description="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC">
+                                            YOUTUBE
+                                        </a>
+                                    </p>
+                                    <p>
+                                        <a href="https://www.instagram.com/gumac.vn">
+                                            <img src="https://cdn.gumac.vn/Content/Image/WebImage/instagram24.png" alt="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" title="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC" description="Thời trang nữ đẹp cá tính dễ thương 2020 tại TPHCM – GUMAC">
+                                            INSTAGRAM
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="address">
+                            <img src="~/images/home/map.png" alt="" />
+                            <p>55 Đại An, P. Văn Quán, Hà Đông, Hà Nội</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Dịch vụ</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/Home/Contact">Tư vấn trực tuyến</a></li>
+                                <li><a href="/Home/Contact">Liên hệ chúng tôi</a></li>
+                                <li><a href="/Cart/CheckingOrderByClient">Theo dõi đơn hàng</a></li>
+                                <li><a href="#">FAQ’s</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Sản phẩm</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Hàng hiệu</a></li>
+                                <li><a href="#">Thời trang Nam</a></li>
+                                <li><a href="#">Thời trang Nữ</a></li>
+                                <li><a href="#">Giày</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Chính sách</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Chính sách hoàn trả</a></li>
+                                <li><a href="#">Hệ thống hóa đơn</a></li>
+                                <li><a href="#">Hệ thống thẻ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Thông tin Shop</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Company Information</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Store Location</a></li>
+                                <li><a href="#">Affillate Program</a></li>
+                                <li><a href="#">Copyright</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-sm-offset-1">
+                        <div class="single-widget">
+                            <h2>Phản hổi</h2>
+                            <form action="#" class="searchform">
+                                <input type="text" placeholder="Địa chỉ email" />
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-arrow-circle-o-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2020 DOLPHIN-SHOP Inc. All rights reserved.</p>
+                    <p class="pull-right">
+                        Designed by <span>
+                            <a href="#">Dung NT</a>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!--/Footer-->
+
+
+
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <script src="~/js/price-range.js"></script>
+    <script src="~/js/jquery.prettyPhoto.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+
+</html>

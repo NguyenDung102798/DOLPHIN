@@ -1,0 +1,105 @@
+﻿@model DOLPHIN.DTO.OrderRequestDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div><!--/breadcrums-->
+        @using (Html.BeginForm("Payment", "Cart", FormMethod.Get))
+        {
+            <div class="review-payment">
+                <h2>Xác nhận và Thanh toán</h2>
+            </div>
+
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Sản phẩm</td>
+                            <td class="description"></td>
+                            <td class="price">Giá</td>
+                            <td class="quantity">Số lượng</td>
+                            <td class="total">Tổng tiền</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.carts)
+                        {
+                            int total = Int32.Parse(item.Products.Price) * item.Quantity;
+                            <tr>
+                                <td class="cart_product">
+                                    <a href=""><img src="~/images/@item.Products.Images" alt=""></a>
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a href="">@item.Products.ProductName</a></h4>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@item.Products.Price đ</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <a class="cart_quantity_up" href="/Cart/AddCart/@item.Products.Id"> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity"
+                                               autocomplete="off" size="2">
+                                        <a class="cart_quantity_down" href="/Cart/DeleteCart/@item.Products.Id"> - </a>
+                                    </div>
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@string.Format("{0:##,#}", @total) đ</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <a class="cart_quantity_delete" href="/Cart/DeleteCart/@item.Products.Id"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                            <td colspan="2">
+                                <table class="table table-condensed total-result">
+                                    <tr class="shipping-cost">
+                                        <td>Phí vận chuyển</td>
+                                        <td>Miễn phí</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tổng thanh toán</td>
+                                        <td><span>@ViewBag.Total</span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="step-one">
+                <h2 class="heading">Thông tin giao hàng</h2>
+            </div>
+            <div class="shopper-informations">
+                <div class="row">
+                    <div class="col-sm-8 clearfix">
+                        <div class="bill-to">
+                            <div class="form-one">
+                                <span>Xin hãy điền đầy đủ thông tin:</span>
+                                <input asp-for="Name" type="text" placeholder="Tên người nhận *">
+                                <input asp-for="Phone" type="text" placeholder="Số điện thoại *">
+                                <input asp-for="Address" type="text" placeholder="Địa chỉ *">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-button-proceed">
+                        <button type="submit" class="pull-right btn btn-default check_out">MUA HÀNG</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

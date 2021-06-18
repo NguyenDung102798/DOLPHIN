@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DOLPHIN.Model.Users>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="margin-left:20px">Quản lý Tài khoản</h2>
+
+<span class="badge bg-primary" style="font-size:20px ; margin-left:20px"><a href="/Admin/Users/Create">Thêm mới tài khoản</a></span>
+<div class="card">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Tên đăng nhập
+                    </th>
+                    <th class="text-center">
+                        Mật khẩu
+                    </th>
+                    <th class="text-center">
+                        EMail
+                    </th class="text-center">
+                    <th class="text-center">
+                        Chủ tài khoản
+                    </th>
+                    <th class="text-center">
+                        Ngày tạo
+                    </th>
+                    <th class="text-center">
+                        Trạng thái
+                    </th>
+                    <th class="text-center">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.JoinDate)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-warning"><a href="/Admin/Users/Edit/@item.Id">Sửa</a></span> 
+                            <span class="badge bg-success"><a href="/Admin/Users/Details/@item.Id">Chi tiết</a></span> 
+                            <span class="badge bg-danger"><a href="/Admin/Users/Delete/@item.Id">Xóa</a></span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

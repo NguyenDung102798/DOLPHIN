@@ -1,0 +1,85 @@
+﻿@using DOLPHIN.Model
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="slider">
+    <!--slider-->
+    <div class="img-banner">
+        <img style="width:100%; margin-bottom: 45px;" src="/images/banner.png" alt="Alternate Text" />
+    </div>
+</section>
+<!--/slider-->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 padding-right">
+                <div class="features_items">
+                    <!--Nổi bật-->
+                    <h2 class="title text-center">Sản phẩm nổi bật</h2>
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-3">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <a href="/Home/Details/@item.Id"><img src="~/images/@item.Images" alt="" /></a>
+                                        <p>@item.ProductName</p>
+                                        <h2>@string.Format("{0:##,#}", item.Price) đ</h2>
+                                        <a href="/Home/Details/@item.Id" class="btn btn-default add-to-cart">
+                                            <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--end-->
+                <!--Sản phẩm mới-->
+                    <h2 class="title text-center">Sản phẩm mới</h2>
+                    @foreach (var item in ViewBag.ListProductNew)
+                    {
+                        <div class="col-sm-3">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <a href="/Home/Details/@item.Id"><img src="~/images/@item.Images" alt="" /></a>
+                                        <p>@item.ProductName</p>
+                                        <h2>@string.Format("{0:##,#}", item.Price) đ</h2>
+                                        <a href="/Home/Details/@item.Id" class="btn btn-default add-to-cart">
+                                            <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--end-->
+            <div class="col-sm-12">
+                <h2 class="title text-center">Chương trình khuyến mại</h2>
+                <div class="row">
+                    <div class="col-md-8">
+                        <article>
+                            <a class="article-title" href="" title="Khuyến mãi">LƯƠNG VỀ TAY - HÀNG HIỆU SĂN NGAY SALE UP TO 70%</a>
+                            <img class="article-img" src="~/images/khuyenmai.png" alt="" />
+                        </article>
+                    </div>
+                    <div class="col-md-4">
+                        @foreach (var item in ViewBag.NewArticle)
+                        {
+                            <article>
+                                <img class="article-img-new" src="~/images/@item.Images" alt="Alternate Text" />
+                                <a class="article-title-new" href="" title="@item.Titile">@item.Titile</a>
+                                <p>@item.CreatedDate</p>
+                            </article>
+                         }
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+</section>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "TrackingSucces";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header text-center">
+        <h2 font-weight:bold; font-size:20px>Theo dõi đơn hàng tại DOLPHIN CLOTHING</h2>
+    </div>
+    <div class="card-body">
+        @foreach (var item in Model)
+        {
+            <ul class="text-center" style="font-size:16px">
+                <li>Trạng thái đơn hàng: @item.Status</li>
+                <li>Người nhận: @item.ToName</li>
+                <li>Địa chỉ: @item.ToAddress</li>
+                <li>Số điện thoại: @item.ToPhone</li>
+            </ul>
+        }
+    </div>
+</div>
+

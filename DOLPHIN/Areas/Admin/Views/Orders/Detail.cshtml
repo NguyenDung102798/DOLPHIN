@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style=" margin-left:20px">Chi tiết đơn hàng : </h2>
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <div class="card-header">
+            <h4>Đơn hàng gửi tới: @item.Name</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    <span>Số điện thoại:</span>
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.Raw(item.Phone)
+                </dd>
+                <dt class="col-sm-2">
+                    <span>Địa chỉ:</span>
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.Raw(item.Address)
+                </dd>
+                <dt class="col-sm-2">
+                    <span>Trạng thái đơn hàng:</span>
+                </dt>
+                <dd class="col-sm-10">
+                    @foreach (var logs in item.logsOrderDtos)
+                    {
+                        @Html.Raw(logs.Status)
+                        <span style="margin-left:20px">Cập nhật lúc : @logs.UpdateDate</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+}
+<a href="/Admin/Orders/Index" class="btn btn-primary" style="margin-left:20px">Quay lại</a>
+

@@ -1,0 +1,26 @@
+﻿@using DOLPHIN.Model
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <article>
+                <a class="article-title" href="" title="@Model.Titile">@Model.Titile</a>
+                <img class="article-img" src="~/images/@Model.Images" alt="" />
+            </article>
+        </div>
+        <div class="col-md-4">
+            <h2>BÀI VIẾT MỚI NHẤT</h2>
+            @foreach (var item in ViewBag.NewArticle)
+            {
+                <article>
+                    <img class="article-img-new" src="~/images/@item.Images" alt="Alternate Text" />
+                    <a class="article-title-new" href="" title="@item.Titile">@item.Titile</a>
+                    <p>@item.CreatedDate</p>
+                </article>
+            }
+        </div>
+    </div>
+</div>

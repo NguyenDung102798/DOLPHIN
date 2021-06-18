@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DOLPHIN.Model.Options>
+
+@{ ViewData["Title"] = "Index";
+                Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<h2 style="margin-left:20px">Quản lý Option</h2>
+<span class="badge bg-primary" style="font-size:20px ; margin-left:20px"><a href="/Admin/Option/Create">Create New Option</a></span>
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Color
+                    </th>
+                    <th class="text-center">
+                        Size
+                    </th>
+                    <th class="text-center">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Color)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Size)
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-danger"><a href="/Admin/Option/Delete/@item.Id">Xóa</a></span>
+                        </td>
+                    </tr>
+                 }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model DOLPHIN.Model.Products
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="margin:20px">Chỉnh sửa  sản phẩm</h2>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CategoryId" class="control-label">Danh mục</label>
+                        <input asp-for="CategoryId" class="form-control" />
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductName" class="control-label">Tên sản phẩm</label>
+                        <input asp-for="ProductName" class="form-control" />
+                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label">Giá</label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Desciption" class="control-label">Mô tả</label>
+                        <input asp-for="Desciption" class="form-control" />
+                        <span asp-validation-for="Desciption" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Images" class="control-label">Ảnh</label>
+                        <div class="col-md-10">
+                            <input type="file" name="file" />
+                        </div>
+                        <span asp-validation-for="Images" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label">Trạng thái</label>
+                        <input asp-for="Status" class="form-control" />
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a href="/Admin/Products/Index" class="btn btn-primary" style="margin-left:10px">Quay lại</a>
+</div>
+

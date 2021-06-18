@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Sản phẩm</td>
+                        <td class="description"></td>
+                        <td class="price">Giá</td>
+                        <td class="quantity">Số lượng</td>
+                        <td class="total">Tổng tiền</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.carts)
+                    {
+                        int total = Int32.Parse(item.Products.Price) * item.Quantity;
+                        <tr>
+                            <td class="cart_product">
+                                <a href=""><img src="~/images/@item.Products.Images" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">@item.Products.ProductName</a></h4>
+                            </td>
+                            <td class="cart_price">
+                                <p>@item.Products.Price đ</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up" href="/Cart/AddCart/@item.Products.Id"> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity"
+                                           autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" href="/Cart/DeleteCart/@item.Products.Id"> - </a>
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">@string.Format("{0:##,#}", @total) đ</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" href="/Cart/DeleteCart/@item.Products.Id"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section id="do_action">
+    <div class="container">
+        <div class="row">
+            <a class="pull-right btn btn-default check_out" href="/Cart/Checkout">Tiếp tục thanh toán</a>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $(".updateCart").click(function (event) {
+            event.preventDefault();
+            var quantity = $(".quantity_" + $(this).attr("data-id")).val();
+            console.log(quantity);
+            $.ajax({
+                type: "POST",
+                url:"@Url.Action("updateCart","Cart")",
+                data: {
+                    id: $(this).attr("data-id"),
+                    quantity:quantity
+                },
+                success: function (result) {
+                    window.location.href = '@Url.Action("Index","Cart")';
+                }
+            });
+        });
+    });
+</script>
+

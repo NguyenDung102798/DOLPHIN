@@ -1,0 +1,39 @@
+﻿.article-img {
+    max-height: 530px;
+    max-width: 690px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.article-title {
+    color: #222;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.article-img-new {
+    max-height: 250px;
+    max-width: 350px;
+}
+
+.article-title-new {
+    color: #222;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+img-infomation{
+    max-width:600px;
+}
+
+.km-img-main {
+    max-height: 530px;
+    max-width: 565px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.km-img-right {
+    max-height: 250px;
+    max-width: 255px;
+}

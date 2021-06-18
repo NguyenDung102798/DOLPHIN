@@ -1,0 +1,98 @@
+﻿@model IEnumerable<DOLPHIN.Model.Orders>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h2 style="margin-left:20px">Quản lý Đơn hàng</h2>
+<span class="badge bg-primary" style="font-size:20px ; margin-left:20px"><a href="/Admin/Categories/Create">Thêm mới đơn hàng</a></span>
+<div class="card">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Mã đơn hàng
+                    </th>
+                    <th class="text-center">
+                        Order Code
+                    </th>
+                    <th class="text-center">
+                        Ngày dự kiến giao hàng
+                    </th>
+                    <th class="text-center">
+                        Nhân viên tạo
+                    </th>
+                    <th class="text-center">
+                        Tên người nhận
+                    </th>
+                    <th class="text-center">
+                        Địa chỉ nhận hàng
+                    </th>
+                    <th class="text-center">
+                        SĐT người nhận
+                    </th>
+                    <th class="text-center">
+                        Trạng thái
+                    </th>
+                    <th class="text-center">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.GHNRef)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.OrderCode)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.ExpectedDeliveryTime)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CreatedBy.FullName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CustomerName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td class="text-center">
+                            @if (item.OrderStatusCode == 0)
+                            {
+                                <p style="color:red">Chưa in mã vận đơn</p>;
+                            }
+                            @if (item.OrderStatusCode == 1)
+                            {
+                                <p style="color: yellow">Đã xác nhận đơn hàng</p>;
+                            }
+                            @if (item.OrderStatusCode == 2)
+                            {
+                                <p style="color:blue">Đang vận chuyển</p>;
+                            }
+                            @if (item.OrderStatusCode == 3)
+                            {
+                                <p style="color: darkgreen">Đã giao hàng</p>;
+                            }
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-warning"><a href="/Admin/Orders/Edit/@item.Id">Sửa</a></span>
+                            <span class="badge bg-success"><a href="/Admin/Orders/Detail/@item.Id">Chi tiết</a></span>
+                            <span class="badge bg-danger"><a href="/Admin/Orders/Delete/@item.Id">Xóa</a></span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

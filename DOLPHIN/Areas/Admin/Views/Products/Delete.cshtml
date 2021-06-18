@@ -1,0 +1,17 @@
+﻿@model DOLPHIN.Model.Products
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="margin-left:20px ; margin-top:20px">Bạn có chắc chắn muốn xóa sản phẩm @Model.ProductName?</h3>
+<div class="card">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="submit" value="Xóa" class="btn btn-danger" style="margin-left:20px" />
+        <a href="/Admin/Products/Index" class="btn btn-primary" style="margin-left:20px">Quay lại</a>
+    }
+</div>

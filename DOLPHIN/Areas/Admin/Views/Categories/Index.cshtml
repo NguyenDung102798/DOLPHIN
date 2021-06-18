@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DOLPHIN.Model.Categories>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h2 style="margin-left:20px">Quản lý Danh Mục</h2>
+<span class="badge bg-primary" style="font-size:20px ; margin-left:20px"><a href="/Admin/Categories/Create">Thêm mới danh mục</a></span>
+<div class="card">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Tên
+                    </th>
+                    <th class="text-center">
+                        Mô tả
+                    </th>
+                    <th class="text-center">
+                        Ngày cập nhật
+                    </th>
+                    <th class="text-center">
+                        Cập nhật bởi
+                    </th>
+                    <th class="text-center">
+                        Ngày tạo
+                    </th>
+                    <th class="text-center">
+                        Tạo bởi
+                    </th>
+                    <th class="text-center">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.UpdatedDate)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.UpdatedBy.Email)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CreatedBy.UserName)
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-warning"><a href="/Admin/Categories/Edit/@item.Id">Sửa</a></span> 
+                            <span class="badge bg-success"><a href="/Admin/Categories/Details/@item.Id">Chi tiết</a></span> 
+                            <span class="badge bg-danger"><a href="/Admin/Categories/Delete/@item.Id">Xóa</a></span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
